@@ -34,3 +34,10 @@ export const deleteCar = async (req: Request, res: Response) => {
   );
   return res.json(results)
 }
+
+export const getOneCar = async (req: Request, res: Response) => {
+  const results = await myDataSource.getRepository(Car).findBy(
+    { license_plate: req.params.id }
+  )
+  return res.json(results);
+}

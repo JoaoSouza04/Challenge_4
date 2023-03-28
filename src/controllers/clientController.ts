@@ -2,13 +2,13 @@ import { Request, Response } from "express";
 import { myDataSource } from "../../app-data-source";
 import { Client } from "../db/entities/client.entity";
 
-export const createClient = async (req: Request, res: Response) => {
-  const clients = await myDataSource.getRepository(Client).create(req.body);
+export const getAllClients = async (req: Request, res: Response) => {
+  const clients = await myDataSource.getRepository(Client).find();
   res.json(clients);
 }
 
-export const getAllClients = async (req: Request, res: Response) => {
-  const clients = await myDataSource.getRepository(Client).find();
+export const createClient = async (req: Request, res: Response) => {
+  const clients = await myDataSource.getRepository(Client).create(req.body);
   res.json(clients);
 }
 

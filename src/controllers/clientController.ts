@@ -9,6 +9,7 @@ export const getAllClients = async (req: Request, res: Response) => {
 
 export const createClient = async (req: Request, res: Response) => {
   const client = await myDataSource.getRepository(Client).create(req.body);
+  await myDataSource.getRepository(Client).save(client);
   return res.json(client);
 }
 
@@ -20,10 +21,14 @@ export const getOneClient = async (req: Request, res: Response) => {
 }
 
 export const updateClient = async (req: Request, res: Response) => {
+  if (req.body.password) {
+    return res.status(400).send("The password can't be updated in this route!")
+  }
+
   const client = await myDataSource.getRepository(Client).findOneBy({
     id: req.params.id,
   });
-  myDataSource.getRepository(Client).merge(client, req.body)
+  await myDataSource.getRepository(Client).merge(client, req.body)
   const results = await myDataSource.getRepository(Client).save(client);
-  return res.send(results);
+  return res.json(results);
 }

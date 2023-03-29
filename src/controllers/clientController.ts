@@ -8,8 +8,8 @@ export const getAllClients = async (req: Request, res: Response) => {
 }
 
 export const createClient = async (req: Request, res: Response) => {
-  const clients = await myDataSource.getRepository(Client).create(req.body);
-  res.json(clients);
+  const client = await myDataSource.getRepository(Client).create(req.body);
+  return res.json(client);
 }
 
 export const getOneClient = async (req: Request, res: Response) => {

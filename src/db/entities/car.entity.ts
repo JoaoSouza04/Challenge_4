@@ -1,8 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Car {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
+  carId: string;
+
+  @Column()
   license_plate: string;
 
   @Column()

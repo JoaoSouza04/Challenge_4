@@ -19,7 +19,7 @@ export class Mechanic {
   @Column()
   phone: string;
 
-  @Column()
+  @Column({ type: 'text', unique: true })
   email: string;
 
   @Column("varchar", { array: true })

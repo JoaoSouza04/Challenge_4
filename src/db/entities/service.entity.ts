@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryColumn, BeforeInsert, BeforeUpdate, PrimaryGeneratedColumn } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, AfterInsert } from "typeorm"
+import { myDataSource } from "../../../app-data-source"
 import { Part } from "./part.entity"
 
 @Entity()
@@ -25,9 +26,20 @@ export class Service {
   @Column("varchar", { array: true })
   parts: Array<Part>
 
-  @Column()
-  totalPrice: string
+  @Column({ default: null })
+  totalPrice: number
 
   @Column()
   status: string
+
+  @AfterInsert()
+  async changeTotalPrice() {
+    const partFound = await myDataSource.getRepository(Part).findBy({ partId: this.parts[0].partId })
+    this.parts.forEach(part => {
+      let qtd = 0;
+      qtd = part.qtd;
+      this.totalPrice = qtd * partFound[0].unitPrice;
+    })
+  }
+
 }

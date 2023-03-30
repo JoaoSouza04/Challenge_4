@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { myDataSource } from "../../app-data-source";
 import { Client } from "../db/entities/client.entity";
+import { validateClientData } from "../services/createClientValidation";
 
 export const getAllClients = async (req: Request, res: Response) => {
   const clients = await myDataSource.getRepository(Client).find();
@@ -13,6 +14,11 @@ export const getAllClients = async (req: Request, res: Response) => {
 }
 
 export const createClient = async (req: Request, res: Response) => {
+
+  const valid = validateClientData(req.body);
+  console.log(valid);
+
+  if (valid.error) return res.status(400).send("The fields aren't valid!")
 
   const client = await myDataSource.getRepository(Client).create(req.body);
   await myDataSource.getRepository(Client).save(client)

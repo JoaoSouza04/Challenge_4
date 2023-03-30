@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
 import { myDataSource } from "../../app-data-source";
+import { Car } from "../db/entities/car.entity";
+import { Client } from "../db/entities/client.entity";
+import { Mechanic } from "../db/entities/mechanic.entity";
+import { Part } from "../db/entities/part.entity";
 import { Service } from "../db/entities/service.entity";
 
 export const getAllServices = async (req: Request, res: Response) => {
@@ -9,8 +13,26 @@ export const getAllServices = async (req: Request, res: Response) => {
 
 export const createService = async (req: Request, res: Response) => {
 
+  const client = await myDataSource.getRepository(Client).findOne(
+    { where: { id: req.body.clientId } });
+
+  const mechanic = await myDataSource.getRepository(Mechanic).findOne(
+    { where: { id: req.body.mechanicId } });
+
+  const car = await myDataSource.getRepository(Car).findOne(
+    { where: { carId: req.body.carId } });
+
+  const parts = req.body.parts;
+  const part = await myDataSource.getRepository(Part).findOne(
+    { where: { partId: parts.partId } })
+
+  const result = (!client || !mechanic || !car || !part) ? true : false;
+
+  if (result) return res.status(400).send("Invalid or not found id!")
+
   const service = await myDataSource.getRepository(Service).create(req.body);
   await myDataSource.getRepository(Service).save(service);
+
   return res.json(service);
 }
 

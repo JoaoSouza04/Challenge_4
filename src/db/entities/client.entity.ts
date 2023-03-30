@@ -6,40 +6,40 @@ export class Client {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column()
+  @Column({ type: 'text' })
   name: string
 
-  @Column()
+  @Column({ type: 'text' })
   cpf_cnpj: string
 
-  @Column()
+  @Column({ type: 'text' })
   client_type: string
 
-  @Column()
+  @Column({ type: 'date' })
   birthday: Date
 
-  @Column()
+  @Column({ type: 'text' })
   phone: string
 
-  @Column()
+  @Column({ type: 'text', unique: true })
   email: string
 
-  @Column()
+  @Column({ type: 'text' })
   password: string
 
-  @Column()
+  @Column({ type: 'text' })
   zipCode: string
 
-  @Column()
+  @Column({ type: 'text' })
   street: string
 
-  @Column()
+  @Column({ type: 'text' })
   number: string
 
-  @Column()
+  @Column({ type: 'text' })
   neighbourhood: string
 
-  @Column()
+  @Column({ type: 'text' })
   city: string
 
   @BeforeInsert()

@@ -6,7 +6,8 @@ import { getAllMechanics, createMechanic, updateMechanic, getOneMechanic }
   from "./controllers/mechanicController";
 import { getAllServices, createService, updateService, getOneService }
   from "./controllers/serviceController";
-// import { loginClient } from "./controllers/authController";
+
+import { loginClient } from "./controllers/authController";
 const routes = Router();
 
 routes.get("/", (req: Request, res: Response) => {
@@ -39,6 +40,6 @@ routes.post("/api/v1/services", createService);
 routes.patch("/api/v1/services/:id", updateService);
 routes.get("/api/v1/services/:id", getOneService);
 
-// routes.post("/api/v1/client/login", loginClient);
+routes.post("/api/v1/client/login", loginClient);
 
 export default routes;

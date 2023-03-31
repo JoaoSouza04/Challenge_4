@@ -3,6 +3,7 @@ import { myDataSource } from "../../app-data-source";
 import { Car } from "../db/entities/car.entity";
 import { Client } from "../db/entities/client.entity";
 import { validateCarData } from "../services/createCarValidation";
+import { validateCarUpdate } from "../services/updateCarValidation";
 
 export const getAllCars = async (req: Request, res: Response) => {
   const results = await myDataSource.getRepository(Car).findBy(
@@ -41,6 +42,9 @@ export const updateCar = async (req: Request, res: Response) => {
   if (req.body.ownerId != req.params.id) {
     return res.status(400).send("The id of the URL and the ownerId aren't the same!")
   }
+
+  const valid = validateCarUpdate(req.body);
+  if (valid.error) return res.status(400).send("The fields aren't valid!");
 
   await myDataSource.getRepository(Car).merge(car, req.body)
   const results = await myDataSource.getRepository(Car).save(car);

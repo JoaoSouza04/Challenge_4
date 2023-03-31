@@ -23,7 +23,7 @@ export const validateClientData = (data: {
     birthday: Joi.required(),
     phone: Joi.string().min(15).max(15).required(),
     email: Joi.string().email().required(),
-    password: Joi.string().min(8).max(20).required(),
+    password: Joi.string().required(),
     zipCode: Joi.string().min(9).max(9).required(),
     street: Joi.string().required(),
     number: Joi.string().required(),

@@ -20,7 +20,7 @@ export const validateMechanicData = (data: {
     birthday: Joi.required(),
     phone: Joi.string().min(15).max(15).required(),
     email: Joi.string().email().required(),
-    password: Joi.string().min(8).max(20).required(),
+    password: Joi.string().required(),
     specialities: Joi.array().required(),
     hiringDate: Joi.required(),
     serviceFee: Joi.number().required(),

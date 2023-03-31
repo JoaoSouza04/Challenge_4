@@ -32,3 +32,31 @@ export const loginClient = async (req: Request, res: Response) => {
     }
   })
 }
+
+export const loginMechanic = async (req: Request, res: Response) => {
+  const email = req.body.email
+  const password = req.body.password;
+  const mechanic = await myDataSource.getRepository(Mechanic).findOne({ where: { email } });
+
+  if (!mechanic) {
+    return res.status(404).json({
+      message: "Client not found!, please check the fields"
+    });
+  }
+
+  const isValidPassword = await bcrypt.compare(password, mechanic.password);
+
+  if (!isValidPassword) {
+    return res.status(401).json({
+      message: `Passwords aren't the same!`
+    })
+  }
+
+  const token = jwt.sign({ mechanic }, 'process.env.MY_SECRET', { expiresIn: "3h" });
+
+  return res.json({
+    Headers: {
+      jwt: token
+    }
+  })
+}

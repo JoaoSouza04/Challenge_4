@@ -6,6 +6,9 @@ export class Car {
   carId: string;
 
   @Column()
+  ownerId: string;
+
+  @Column()
   license_plate: string;
 
   @Column()

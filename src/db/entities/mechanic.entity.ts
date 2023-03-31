@@ -22,6 +22,9 @@ export class Mechanic {
   @Column({ type: 'text', unique: true })
   email: string;
 
+  @Column()
+  password: string
+
   @Column("varchar", { array: true })
   specialities: Array<string>;
 
@@ -33,9 +36,6 @@ export class Mechanic {
 
   @Column()
   status: string
-
-  @Column()
-  password: string
 
   @BeforeInsert()
   @BeforeUpdate()

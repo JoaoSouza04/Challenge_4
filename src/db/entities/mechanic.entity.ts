@@ -39,7 +39,7 @@ export class Mechanic {
 
   @BeforeInsert()
   @BeforeUpdate()
-  hashPassword() {
-    this.password = bcrypt.hashSync(this.password, 8);
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, 10);
   }
 }

@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { myDataSource } from "../../app-data-source";
 import { Mechanic } from "../db/entities/mechanic.entity";
 import { validateMechanicData } from "../services/createMechanicValidation";
-import { validateClientUpdate } from "../services/updateClientValidation";
 import { validateMechanicUpdate } from "../services/updateMechanicValidation";
 
 export const getAllMechanics = async (req: Request, res: Response) => {
@@ -37,7 +36,13 @@ export const getOneMechanic = async (req: Request, res: Response) => {
 export const updateMechanic = async (req: Request, res: Response) => {
 
   if (req.body.password) {
-    return res.status(400).send("The password can't be updated in this route!")
+    return res.status(400).json({
+      type: "Request input",
+      error: {
+        resource: "password",
+        message: "The password can't be updated in this route!"
+      }
+    });
   }
 
   const valid = validateMechanicUpdate(req.body);

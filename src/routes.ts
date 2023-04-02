@@ -7,7 +7,7 @@ import { getAllMechanics, createMechanic, updateMechanic, getOneMechanic }
 import { getAllServices, createService, updateService, getOneService }
   from "./controllers/serviceController";
 
-import { loginClient, loginMechanic, updateClientPassword, updateMechanicPassword } from "./controllers/authController";
+import { loginClient, loginMechanic, refreshClientToken, refreshMechanicToken, updateClientPassword, updateMechanicPassword } from "./controllers/authController";
 const routes = Router();
 
 routes.get("/", (req: Request, res: Response) => {
@@ -41,9 +41,11 @@ routes.patch("/api/v1/services/:id", updateService);
 routes.get("/api/v1/services/:id", getOneService);
 
 routes.post("/api/v1/client/login", loginClient);
-routes.post("/api/v1/client/updatePassword", updateClientPassword)
+routes.post("/api/v1/client/updatePassword", updateClientPassword);
+routes.post("/api/v1/client/refreshToken", refreshClientToken);
 routes.post("/api/v1/mechanic/login", loginMechanic);
-routes.post("/api/v1/mechanic/updatePassword", updateMechanicPassword)
+routes.post("/api/v1/mechanic/updatePassword", updateMechanicPassword);
+routes.post("/api/v1/mechanic/refreshToken", refreshMechanicToken);
 
 
 export default routes;

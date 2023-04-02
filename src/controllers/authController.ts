@@ -41,7 +41,6 @@ export const loginMechanic = async (req: Request, res: Response) => {
     });
   }
 
-  console.log(mechanic.password);
   const isValidPassword = await bcrypt.compare(password, mechanic.password);
 
   if (!isValidPassword) {
@@ -93,5 +92,27 @@ export const updateMechanicPassword = async (req: Request, res: Response) => {
   return res.status(200).json({
     message: "Your new Password",
     password: password
+  })
+}
+
+export const refreshClientToken = async (req: Request, res: Response) => {
+
+  const oldToken = jwt.decode(req.body.token);
+  const newToken = jwt.sign({ oldToken }, 'process.env.MY_SECRET', { expiresIn: "15m" });
+
+  res.status(200).json({
+    message: "This is tour new Token, enjoy!",
+    token: newToken
+  })
+}
+
+export const refreshMechanicToken = async (req: Request, res: Response) => {
+
+  const oldToken = jwt.decode(req.body.token);
+  const newToken = jwt.sign({ oldToken }, 'process.env.MY_SECRET', { expiresIn: "15m" });
+
+  res.status(200).json({
+    message: "This is tour new Token, enjoy!",
+    token: newToken
   })
 }

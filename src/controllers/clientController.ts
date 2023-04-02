@@ -36,7 +36,13 @@ export const getOneClient = async (req: Request, res: Response) => {
 
 export const updateClient = async (req: Request, res: Response) => {
   if (req.body.password) {
-    return res.status(400).send("The password can't be updated in this route!")
+    return res.status(400).json({
+      type: "Request input",
+      error: {
+        resource: "password",
+        message: "The password can't be updated in this route!"
+      }
+    });
   }
 
   const valid = validateClientUpdate(req.body);

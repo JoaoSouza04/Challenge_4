@@ -30,7 +30,15 @@ export const createService = async (req: Request, res: Response) => {
 
   const result = (!client || !mechanic || !car || !part) ? true : false;
 
-  if (result) return res.status(400).send("Invalid or not found id!");
+  if (result) {
+    return res.status(400).json({
+      type: "Validation Error",
+      error: {
+        resource: "UUID",
+        message: "Invalid or not found id!"
+      }
+    });
+  }
 
   const valid = validateServiceData(req.body);
   if (valid.error) return res.status(400).send("The fields aren't valid!");
@@ -65,7 +73,15 @@ export const updateService = async (req: Request, res: Response) => {
 
   const result = (!client || !mechanic || !car || !part) ? true : false;
 
-  if (result) return res.status(400).send("Invalid or not found id!");
+  if (result) {
+    return res.status(400).json({
+      type: "Validation Error",
+      error: {
+        resource: "UUID",
+        message: "Invalid or not found id!"
+      }
+    });
+  }
 
   const valid = validateServiceUpdate(req.body);
   if (valid.error) return res.status(400).send("The fields aren't valid!");

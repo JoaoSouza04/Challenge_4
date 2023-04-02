@@ -15,10 +15,24 @@ export const createCar = async (req: Request, res: Response) => {
   const client = await myDataSource.getRepository(Client).findOne(
     { where: { id: req.body.clientId } });
 
-  if (!client) return res.status(400).send("Invalid or not found id!");
+  if (!client) {
+    return res.status(400).json({
+      type: "Validation Error",
+      error: {
+        resource: "Client id",
+        message: "Invalid or not found id!"
+      }
+    });
+  }
 
   if (req.body.ownerId != req.params.id) {
-    return res.status(400).send("The id of the URL and the ownerId aren't the same!")
+    return res.status(400).json({
+      type: "Validation Error",
+      error: {
+        resource: "Client id",
+        message: "The id of the URL and the ownerId aren't the same!"
+      }
+    })
   }
 
   const valid = validateCarData(req.body);
@@ -37,10 +51,24 @@ export const updateCar = async (req: Request, res: Response) => {
   const client = await myDataSource.getRepository(Client).findOne(
     { where: { id: req.body.ownerId } });
 
-  if (!client) return res.status(400).send("Invalid or not found owner id!");
+  if (!client) {
+    return res.status(400).json({
+      type: "Validation Error",
+      error: {
+        resource: "Client id",
+        message: "Invalid or not found id!"
+      }
+    });
+  }
 
   if (req.body.ownerId != req.params.id) {
-    return res.status(400).send("The id of the URL and the ownerId aren't the same!")
+    return res.status(400).json({
+      type: "Validation Error",
+      error: {
+        resource: "Client id",
+        message: "The id of the URL and the ownerId aren't the same!"
+      }
+    })
   }
 
   const valid = validateCarUpdate(req.body);

@@ -7,13 +7,13 @@ import { validateCarUpdate } from "../services/updateCarValidation";
 
 export const getAllCars = async (req: Request, res: Response) => {
   const results = await myDataSource.getRepository(Car).findBy(
-    { license_plate: req.params.id });
+    { ownerId: req.params.id });
   return res.json(results);
 }
 
 export const createCar = async (req: Request, res: Response) => {
   const client = await myDataSource.getRepository(Client).findOne(
-    { where: { id: req.body.clientId } });
+    { where: { id: req.body.ownerId } });
 
   if (!client) {
     return res.status(400).json({

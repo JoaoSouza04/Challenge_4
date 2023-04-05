@@ -22,7 +22,7 @@ export const loginClient = async (req: Request, res: Response) => {
     })
   }
 
-  const token = jwt.sign({ client }, 'process.env.MY_SECRET', { expiresIn: "3h" });
+  const token = jwt.sign({ client }, process.env.CLIENT_SECRET, { expiresIn: "30m" });
 
   res.status(200).json({
     message: "Token Generated!",
@@ -49,7 +49,7 @@ export const loginMechanic = async (req: Request, res: Response) => {
     })
   }
 
-  const token = jwt.sign({ mechanic }, 'process.env.MY_SECRET', { expiresIn: "15m" });
+  const token = jwt.sign({ mechanic }, 'process.env.MECHANIC_SECRET', { expiresIn: "30m" });
 
   res.status(200).json({
     message: "Token Generated!",
@@ -98,7 +98,7 @@ export const updateMechanicPassword = async (req: Request, res: Response) => {
 export const refreshClientToken = async (req: Request, res: Response) => {
 
   const oldToken = jwt.decode(req.body.token);
-  const newToken = jwt.sign({ oldToken }, 'process.env.MY_SECRET', { expiresIn: "15m" });
+  const newToken = jwt.sign({ oldToken }, process.env.CLIENT_SECRET, { expiresIn: "30m" });
 
   res.status(200).json({
     message: "This is tour new Token, enjoy!",
@@ -109,7 +109,7 @@ export const refreshClientToken = async (req: Request, res: Response) => {
 export const refreshMechanicToken = async (req: Request, res: Response) => {
 
   const oldToken = jwt.decode(req.body.token);
-  const newToken = jwt.sign({ oldToken }, 'process.env.MY_SECRET', { expiresIn: "15m" });
+  const newToken = jwt.sign({ oldToken }, process.env.MECHANIC_SECRET, { expiresIn: "30m" });
 
   res.status(200).json({
     message: "This is tour new Token, enjoy!",

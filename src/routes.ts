@@ -22,7 +22,7 @@ routes.get("/api/v1/", (req: Request, res: Response) => {
   return res.json({ message: "Welcome to the Auto Repair Shop!" });
 })
 
-routes.get("/api/v1/clients", getAllClients);
+routes.get("/api/v1/clients", authClientToken, getAllClients);
 routes.post("/api/v1/clients", validCreateClient, createClient);
 routes.patch("/api/v1/clients/:id", authClientToken, validUpdateClient, updateClient);
 routes.get("/api/v1/clients/:id", authClientToken, getOneClient);
@@ -33,7 +33,7 @@ routes.patch("/api/v1/clients/:id/cars/:carId", authClientToken, validUpdateCar,
 routes.delete("/api/v1/clients/:id/cars/:carId", authClientToken, deleteCar);
 routes.get("/api/v1/clients/:id/cars/:carId", authGeneralToken, getOneCar);
 
-routes.get("/api/v1/mechanics", getAllMechanics);
+routes.get("/api/v1/mechanics", authMechanicToken, getAllMechanics);
 routes.post("/api/v1/mechanics", validCreateMechanic, createMechanic);
 routes.patch("/api/v1/mechanics/:id", authMechanicToken, validUpdateMechanic, updateMechanic);
 routes.get("/api/v1/mechanics/:id", authMechanicToken, getOneMechanic);

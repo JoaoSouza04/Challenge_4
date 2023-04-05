@@ -5,8 +5,6 @@ import { Client } from "../db/entities/client.entity";
 import { Mechanic } from "../db/entities/mechanic.entity";
 import { Part } from "../db/entities/part.entity";
 import { Service } from "../db/entities/service.entity";
-import { validateServiceData } from "../services/createServiceValidation";
-import { validateServiceUpdate } from "../services/updateServiceValidation"
 
 export const getAllServices = async (req: Request, res: Response) => {
   const services = await myDataSource.getRepository(Service).find();
@@ -39,9 +37,6 @@ export const createService = async (req: Request, res: Response) => {
       }
     });
   }
-
-  const valid = validateServiceData(req.body);
-  if (valid.error) return res.status(400).send("The fields aren't valid!");
 
   const service = await myDataSource.getRepository(Service).create(req.body);
   await myDataSource.getRepository(Service).save(service);
@@ -82,9 +77,6 @@ export const updateService = async (req: Request, res: Response) => {
       }
     });
   }
-
-  const valid = validateServiceUpdate(req.body);
-  if (valid.error) return res.status(400).send("The fields aren't valid!");
 
   const service = await myDataSource.getRepository(Service).findOneBy({
     serviceId: req.params.serviceId,

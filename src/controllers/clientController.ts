@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
 import { myDataSource } from "../../app-data-source";
 import { Client } from "../db/entities/client.entity";
-import { validateClientData } from "../services/createClientValidation";
-import { validateClientUpdate } from "../services/updateClientValidation";
 
 export const getAllClients = async (req: Request, res: Response) => {
   const clients = await myDataSource.getRepository(Client).find();
@@ -15,11 +13,6 @@ export const getAllClients = async (req: Request, res: Response) => {
 }
 
 export const createClient = async (req: Request, res: Response) => {
-
-  const valid = validateClientData(req.body);
-
-  if (valid.error) return res.status(400).send("The fields aren't valid!");
-
   const client = await myDataSource.getRepository(Client).create(req.body);
   await myDataSource.getRepository(Client).save(client)
   return res.json(client);
@@ -35,22 +28,17 @@ export const getOneClient = async (req: Request, res: Response) => {
 }
 
 export const updateClient = async (req: Request, res: Response) => {
-  if (req.body.password) {
-    return res.status(400).json({
-      type: "Request input",
-      error: {
-        resource: "password",
-        message: "The password can't be updated in this route!"
-      }
-    });
-  }
-
-  const valid = validateClientUpdate(req.body);
-  if (valid.error) return res.status(400).send("The fields aren't valid!");
-
   const client = await myDataSource.getRepository(Client).findOneBy({
     id: req.params.id,
   });
+
+  if (!client) return res.status(400).json({
+    type: "UUID",
+    Error: {
+      resource: "URL ID",
+      description: "Can't find the user with the user entered!"
+    }
+  })
   await myDataSource.getRepository(Client).merge(client, req.body)
   const results = await myDataSource.getRepository(Client).save(client);
 

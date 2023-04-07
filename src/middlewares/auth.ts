@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { string } from "joi";
 import jwt from 'jsonwebtoken';
 
 export const authClientToken = (req: Request, res: Response, next) => {

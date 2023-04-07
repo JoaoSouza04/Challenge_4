@@ -1,0 +1,1324 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Challenge 16 of the Node Program, offered by Compass!",
+    "version": "1.0.0",
+    "title": "Auto Repair Shop API",
+    "contact": {
+      "email": "joao.vieira.pb@compasso.com.br"
+    }
+  },
+  "paths": {
+    "/api/v1/clients": {
+      "post": {
+        "tags": ["Clients"],
+        "summary": "Create one Client",
+        "description": "This route Creates one Client",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schema/Client"
+              },
+              "examples": {
+                "Client": {
+                  "value": {
+                    "name": "John Doe",
+                    "cpf_cnpj": "704.631.340-79",
+                    "client_type": "PF",
+                    "birthday": "1994-11-04",
+                    "phone": "(95) 98343-7116",
+                    "email": "john.doe@provider5.com",
+                    "password": "password",
+                    "zipCode": "93950-000",
+                    "street": "Rua Oliveiras",
+                    "number": "1A",
+                    "neighbourhood": "União",
+                    "city": "Porto Alegre"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "The fields are invalid!"
+          },
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Client"
+                },
+                "examples": {
+                  "Client": {
+                    "value": {
+                      "name": "John Doe",
+                      "cpf_cnpj": "704.631.340-79",
+                      "client_type": "PF",
+                      "birthday": "1994-11-04",
+                      "phone": "(95) 98343-7116",
+                      "email": "john.doe@provider5.com",
+                      "password": "crypt password",
+                      "zipCode": "93950-000",
+                      "street": "Rua Oliveiras",
+                      "number": "1A",
+                      "neighbourhood": "União",
+                      "city": "Porto Alegre"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Get All the Clients",
+        "description": "This returns all the Clients",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Client"
+                },
+                "examples": {
+                  "Client": {
+                    "value": [{
+                      "name": "John Doe",
+                      "cpf_cnpj": "704.631.340-79",
+                      "client_type": "PF",
+                      "birthday": "1994-11-04",
+                      "phone": "(95) 98343-7116",
+                      "email": "john.doe@provider5.com",
+                      "password": "crypt password",
+                      "zipCode": "93950-000",
+                      "street": "Rua Oliveiras",
+                      "number": "1A",
+                      "neighbourhood": "União",
+                      "city": "Porto Alegre"
+                    }]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/clients/:id": {
+      "patch": {
+        "tags": ["Clients"],
+        "summary": "Update one Client",
+        "description": "This route updates one Client using the given id in url!",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schema/UpdateClient"
+              },
+              "examples": {
+                "Client": {
+                  "value": {
+                    "name": "John Doe",
+                    "cpf_cnpj": "704.631.340-79",
+                    "client_type": "PF",
+                    "birthday": "1994-11-04",
+                    "phone": "(95) 98343-7116",
+                    "email": "john.doe@provider5.com",
+                    "zipCode": "93950-000",
+                    "street": "Rua Oliveiras",
+                    "number": "1A",
+                    "neighbourhood": "União",
+                    "city": "Porto Alegre"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "The fields are invalid!"
+          },
+          "404": {
+            "description": "Can't find the client with the client id entered!"
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Client"
+                },
+                "examples": {
+                  "Client": {
+                    "value": {
+                      "name": "John Doe",
+                      "cpf_cnpj": "704.631.340-79",
+                      "client_type": "PF",
+                      "birthday": "1994-11-04",
+                      "phone": "(95) 98343-7116",
+                      "email": "john.doe@provider5.com",
+                      "password": "crypt password",
+                      "zipCode": "93950-000",
+                      "street": "Rua Oliveiras",
+                      "number": "1A",
+                      "neighbourhood": "União",
+                      "city": "Porto Alegre"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Clients"],
+        "summary": "Return one Client",
+        "description": "This route returns only one Client using the given id in url!",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Can't find the client with the client id entered!"
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Client"
+                },
+                "examples": {
+                  "Client": {
+                    "value": {
+                      "name": "John Doe",
+                      "cpf_cnpj": "704.631.340-79",
+                      "client_type": "PF",
+                      "birthday": "1994-11-04",
+                      "phone": "(95) 98343-7116",
+                      "email": "john.doe@provider5.com",
+                      "password": "crypt password",
+                      "zipCode": "93950-000",
+                      "street": "Rua Oliveiras",
+                      "number": "1A",
+                      "neighbourhood": "União",
+                      "city": "Porto Alegre"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/clients/:id/cars": {
+      "post": {
+        "tags": ["Cars"],
+        "summary": "Create one Car",
+        "description": "This route creates one Car",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schema/Car"
+              },
+              "examples": {
+                "Car": {
+                  "value": {
+                    "ownerId": "Valid UUID",
+                  "license_plate": "PWS02SE",
+                  "model": "M4",
+                  "year": 2011,
+                  "manufacturer": "BMW",
+                  "color": "White"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "1 - 400": {
+            "description": "The fields are invalid!"
+          },
+          "2 - 400": {
+            "description": "The id of the URL and the ownerId aren't the same!"
+          },
+          "404": {
+            "description": "Invalid or not found id of the client!"
+          },
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Car"
+                },
+                "examples": {
+                  "Car": {
+                    "value": {
+                      "ownerId": "Valid UUID",
+                    "license_plate": "PWS02SE",
+                    "model": "M4",
+                    "year": 2011,
+                    "manufacturer": "BMW",
+                    "color": "White"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Cars"],
+        "summary": "Return all the Cars",
+        "description": "This route returns all the Cars",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Car"
+                },
+                "examples": {
+                  "Car": {
+                    "value": [{
+                      "ownerId": "Valid UUID",
+                      "license_plate": "PWS02SE",
+                      "model": "M4",
+                      "year": 2011,
+                      "manufacturer": "BMW",
+                      "color": "White"
+                    }]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/clients/:id/cars/:carId": {
+      "patch": {
+        "tags": ["Cars"],
+        "summary": "Update one Car",
+        "description": "This route updates one Car using the given id in url!",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "carId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schema/Car"
+              },
+              "examples": {
+                "Car": {
+                  "value": {
+                    "ownerId": "Valid UUID",
+                  "license_plate": "PWS02SE",
+                  "model": "M4",
+                  "year": 2011,
+                  "manufacturer": "BMW",
+                  "color": "White"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "1 - 400": {
+            "description": "The fields are invalid!"
+          },
+          "2 - 400": {
+            "description": "The id of the URL and the ownerId aren't the same!"
+          },
+          "1 - 404": {
+            "description": "Invalid or not found id of the client!"
+          },
+          "2 - 404": {
+            "description": "Can't find the car with the car id entered!"
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Car"
+                },
+                "examples": {
+                  "Car": {
+                    "value": {
+                      "ownerId": "Valid UUID",
+                    "license_plate": "PWS02SE",
+                    "model": "M4",
+                    "year": 2011,
+                    "manufacturer": "BMW",
+                    "color": "White"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Cars"],
+        "summary": "Return one Car",
+        "description": "This route returns only one Car using the given id in url!",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "carId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Can't find the car with the car id entered!"
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Car"
+                },
+                "examples": {
+                  "Car": {
+                    "value": {
+                      "ownerId": "Valid UUID",
+                      "license_plate": "PWS02SE",
+                      "model": "M4",
+                      "year": 2011,
+                      "manufacturer": "BMW",
+                      "color": "White"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Cars"],
+        "summary": "Delete one Car",
+        "description": "This route deletes only one Car using the given id in url!",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "carId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Can't find the car with the car id entered!"
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Car"
+                },
+                "examples": {
+                  "Car": {
+                    "value": {
+                      "message": "This is what has been deleted!",
+                      "data": {
+                        "ownerId": "Valid UUID",
+                        "license_plate": "PWS02SE",
+                        "model": "M4",
+                        "year": 2011,
+                        "manufacturer": "BMW",
+                        "color": "White"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/mechanics": {
+      "post": {
+        "tags": ["Mechanics"],
+        "summary": "Create one Mechanic",
+        "description": "This route Creates one Mechanic",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schema/Mechanic"
+              },
+              "examples": {
+                "Mechanic": {
+                  "value": {
+                    "name": "John Doe",
+                    "cpf": "704.631.340-79",
+                    "birthday": "1994-11-04",
+                    "phone": "(95) 98343-7116",
+                    "email": "john.doe@provider5.com",
+                    "password": "password",
+                    "specialities": ["eletric", "engine", "geometry"],
+                    "hiringDate": "2015-01-01",
+                    "serviceFee": "10",
+                    "status": "Active"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "The fields are invalid!"
+          },
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Mechanic"
+                },
+                "examples": {
+                  "Mechanic": {
+                    "value": {
+                      "name": "John Doe",
+                      "cpf": "704.631.340-79",
+                      "birthday": "1994-11-04",
+                      "phone": "(95) 98343-7116",
+                      "email": "john.doe@provider5.com",
+                      "password": "password",
+                      "specialities": ["eletric", "engine", "geometry"],
+                      "hiringDate": "2015-01-01",
+                      "serviceFee": "10",
+                      "status": "Active"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Mechanics"],
+        "summary": "Get All the Mechanics",
+        "description": "This returns all the Mechanics",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Mechanic"
+                },
+                "examples": {
+                  "Mechanic": {
+                    "value": [{
+                      "name": "John Doe",
+                      "cpf": "704.631.340-79",
+                      "birthday": "1994-11-04",
+                      "phone": "(95) 98343-7116",
+                      "email": "john.doe@provider5.com",
+                      "password": "password",
+                      "specialities": ["eletric", "engine", "geometry"],
+                      "hiringDate": "2015-01-01",
+                      "serviceFee": "10",
+                      "status": "Active"
+                    }]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/mechanics/:id": {
+      "patch": {
+        "tags": ["Mechanics"],
+        "summary": "Update one Mechanics",
+        "description": "This route updates one Mechanic using the given id in url!",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schema/UpdateMechanic"
+              },
+              "examples": {
+                "Mechanic": {
+                  "value": {
+                    "name": "John Doe",
+                    "cpf": "704.631.340-79",
+                    "birthday": "1994-11-04",
+                    "phone": "(95) 98343-7116",
+                    "email": "john.doe@provider5.com",
+                    "password": "password",
+                    "specialities": ["eletric", "engine", "geometry"],
+                    "hiringDate": "2015-01-01",
+                    "serviceFee": "10",
+                    "status": "Active"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "1 - 400": {
+            "description": "The fields are invalid!"
+          },
+          "2 - 400": {
+            "description": "The password can't be updated in this route!"
+          },
+          "404": {
+            "description": "Can't find the mechanic with the mechanic id entered!"
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Mechanic"
+                },
+                "examples": {
+                  "Mechanic": {
+                    "value": {
+                      "name": "John Doe",
+                      "cpf": "704.631.340-79",
+                      "birthday": "1994-11-04",
+                      "phone": "(95) 98343-7116",
+                      "email": "john.doe@provider5.com",
+                      "password": "crypt password",
+                      "specialities": ["eletric", "engine", "geometry"],
+                      "hiringDate": "2015-01-01",
+                      "serviceFee": "10",
+                      "status": "Active"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Mechanics"],
+        "summary": "Return one Mechanic",
+        "description": "This route returns only one Mechanic using the given id in url!",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Can't find the mechanic with the mechanic id entered!"
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Mechanic"
+                },
+                "examples": {
+                  "Mechanic": {
+                    "value": {
+                      "name": "John Doe",
+                      "cpf": "704.631.340-79",
+                      "birthday": "1994-11-04",
+                      "phone": "(95) 98343-7116",
+                      "email": "john.doe@provider5.com",
+                      "password": "crypt password",
+                      "specialities": ["eletric", "engine", "geometry"],
+                      "hiringDate": "2015-01-01",
+                      "serviceFee": "10",
+                      "status": "Active"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/parts": {
+      "post": {
+        "tags": ["Parts"],
+        "summary": "Create one Part",
+        "description": "This route Creates one Part",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schema/Part"
+              },
+              "examples": {
+                "Part": {
+                  "value": {
+                    "title": "Common type",
+                    "description": "just a common type",
+                    "qtd": 10,
+                    "unitPrice": 3000.00
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "The fields are invalid!"
+          },
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Part"
+                },
+                "examples": {
+                  "Part": {
+                    "value": {
+                      "title": "Common type",
+                      "description": "just a common type",
+                      "qtd": 10,
+                      "unitPrice": 3000.00
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Parts"],
+        "summary": "Get All the Parts",
+        "description": "This returns all the Parts",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Part"
+                },
+                "examples": {
+                  "Part": {
+                    "value": [{
+                      "title": "Common type",
+                      "description": "just a common type",
+                      "qtd": 10,
+                      "unitPrice": 3000.00
+                    }]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/parts/:id": {
+      "patch": {
+        "tags": ["Parts"],
+        "summary": "Update one Part",
+        "description": "This route updates one Part using the given id in url!",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schema/Part"
+              },
+              "examples": {
+                "Part": {
+                  "value": {
+                    "title": "Common type",
+                    "description": "just a common type",
+                    "qtd": 10,
+                    "unitPrice": 3000.00
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "The fields are invalid!"
+          },
+          "404": {
+            "description": "Can't find the part with the part id entered!"
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Part"
+                },
+                "examples": {
+                  "Part": {
+                    "value": {
+                      "title": "Common type",
+                      "description": "just a common type",
+                      "qtd": 10,
+                      "unitPrice": 3000.00
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Parts"],
+        "summary": "Return one Part",
+        "description": "This route returns only one Part using the given id in url!",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Can't find the part with the part id entered!"
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Part"
+                },
+                "examples": {
+                  "Part": {
+                    "value": {
+                      "title": "Common type",
+                      "description": "just a common type",
+                      "qtd": 10,
+                      "unitPrice": 3000.00
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/services": {
+      "post": {
+        "tags": ["Services"],
+        "summary": "Create one Service",
+        "description": "This route Creates one Service",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schema/Service"
+              },
+              "examples": {
+                "Service": {
+                  "value": {
+                    "clientId": "Valid UUID",
+                    "carId": "Valid UUID",
+                    "mechanicId": "Valid UUID",
+                    "serviceEstimatedDeliveryDate": "2023-03-30",
+                    "description": "string",
+                    "parts": [
+                      {
+                        "partId": "Valid UUID",
+                        "qtd": 4
+                      }
+                    ],
+                    "status": "open"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "The fields are invalid!"
+          },
+          "404": {
+            "description": "Invalid or not found id's, please check the id's of Client, Mechanic, Car and Parts!"
+          },
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Service"
+                },
+                "examples": {
+                  "Service": {
+                    "value": {
+                      "clientId": "Valid UUID",
+                      "carId": "Valid UUID",
+                      "mechanicId": "Valid UUID",
+                      "serviceEstimatedDeliveryDate": "2023-03-30",
+                      "description": "string",
+                      "parts": [
+                        {
+                          "partId": "Valid UUID",
+                          "qtd": 4
+                        }
+                      ],
+                      "status": "open"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Services"],
+        "summary": "Get All the Services",
+        "description": "This returns all the Services",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Service"
+                },
+                "examples": {
+                  "Service": {
+                    "value": {
+                      "clientId": "Valid UUID",
+                      "carId": "Valid UUID",
+                      "mechanicId": "Valid UUID",
+                      "serviceEstimatedDeliveryDate": "2023-03-30",
+                      "description": "string",
+                      "parts": [
+                        {
+                          "partId": "Valid UUID",
+                          "qtd": 4
+                        }
+                      ],
+                      "status": "open"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/services/:id": {
+      "patch": {
+        "tags": ["Services"],
+        "summary": "Update one Service",
+        "description": "This route updates one Service using the given id in url!",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schema/Service"
+              },
+              "examples": {
+                "Service": {
+                  "value": {
+                    "clientId": "Valid UUID",
+                    "carId": "Valid UUID",
+                    "mechanicId": "Valid UUID",
+                    "serviceEstimatedDeliveryDate": "2023-03-30",
+                    "description": "string",
+                    "parts": [
+                      {
+                        "partId": "Valid UUID",
+                        "qtd": 4
+                      }
+                    ],
+                    "status": "open"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "The fields are invalid!"
+          },
+          "1 - 404": {
+            "description": "Invalid or not found id's, please check the id's of Client, Mechanic, Car and Parts!"
+          },
+          "2 - 404": {
+            "description": "Can't find the service with the service id entered!"
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Service"
+                },
+                "examples": {
+                  "Service": {
+                    "value": {
+                      "clientId": "Valid UUID",
+                      "carId": "Valid UUID",
+                      "mechanicId": "Valid UUID",
+                      "serviceEstimatedDeliveryDate": "2023-03-30",
+                      "description": "string",
+                      "parts": [
+                        {
+                          "partId": "Valid UUID",
+                          "qtd": 4
+                        }
+                      ],
+                      "status": "open"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Services"],
+        "summary": "Return one Service",
+        "description": "This route returns only one Service using the given id in url!",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Can't find the service with the service id entered!"
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Service"
+                },
+                "examples": {
+                  "Service": {
+                    "value": {
+                      "clientId": "Valid UUID",
+                      "carId": "Valid UUID",
+                      "mechanicId": "Valid UUID",
+                      "serviceEstimatedDeliveryDate": "2023-03-30",
+                      "description": "string",
+                      "parts": [
+                        {
+                          "partId": "Valid UUID",
+                          "qtd": 4
+                        }
+                      ],
+                      "status": "open"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schema": {
+      "Client": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "cpf_cnpj": {
+            "type": "string"
+          },
+          "client_type": {
+            "type": "string"
+          },
+          "birthday": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "zipCode": {
+            "type": "string"
+          },
+          "street": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "neighbourhood": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateClient": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "cpf_cnpj": {
+          "type": "string"
+        },
+        "client_type": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
+        },
+        "neighbourhood": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        }
+      }
+      },
+      "Car": {
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string"
+        },
+        "license_plate": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "year": {
+          "type": "number"
+        },
+        "manufacturer": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+          }
+        }
+      },
+      "Mechanic": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "birthday": {
+            "type": "Date"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "specialities": {
+            "type": "Array<string>"
+          },
+          "HiringDate": {
+            "type": "Date"
+          },
+          "serviceFee": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateMechanic": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "birthday": {
+            "type": "Date"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "specialities": {
+            "type": "Array<string>"
+          },
+          "HiringDate": {
+            "type": "Date"
+          },
+          "serviceFee": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "Part": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "qtd": {
+            "type": "number"
+          },
+          "unitPrice": {
+            "type": "number"
+          }
+        }
+      },
+      "Service": {
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "string"
+          },
+          "carId": {
+            "type": "string"
+          },
+          "mechanicId": {
+            "type": "string"
+          },
+          "serviceEstimatedDeliveryDate": {
+            "type": "Date"
+          },
+          "description": {
+            "type": "string"
+          },
+          "parts": {
+            "type": "Array<Part>"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -19,15 +19,15 @@ export const loginClient = async (req: Request, res: Response) => {
   if (!isValidPassword) {
     return res.status(401).json({
       message: `Passwords aren't the same!`
-    })
+    });
   }
 
-  const token = jwt.sign({ client }, process.env.CLIENT_SECRET, { expiresIn: "30m" });
+  const token = jwt.sign({ client }, process.env.CLIENT_SECRET, { expiresIn: "40m" });
 
   res.status(200).json({
     message: "Token Generated!",
     Token: token
-  })
+  });
 }
 
 
@@ -46,15 +46,15 @@ export const loginMechanic = async (req: Request, res: Response) => {
   if (!isValidPassword) {
     return res.status(401).json({
       message: `Passwords aren't the same!`
-    })
+    });
   }
 
-  const token = jwt.sign({ mechanic }, 'process.env.MECHANIC_SECRET', { expiresIn: "30m" });
+  const token = jwt.sign({ mechanic }, process.env.MECHANIC_SECRET, { expiresIn: "40m" });
 
   res.status(200).json({
     message: "Token Generated!",
     Token: token
-  })
+  });
 }
 
 export const updateClientPassword = async (req: Request, res: Response) => {
@@ -73,7 +73,7 @@ export const updateClientPassword = async (req: Request, res: Response) => {
   return res.status(200).json({
     message: "Your new Password",
     password: password
-  })
+  });
 }
 
 export const updateMechanicPassword = async (req: Request, res: Response) => {
@@ -98,21 +98,21 @@ export const updateMechanicPassword = async (req: Request, res: Response) => {
 export const refreshClientToken = async (req: Request, res: Response) => {
 
   const oldToken = jwt.decode(req.body.token);
-  const newToken = jwt.sign({ oldToken }, process.env.CLIENT_SECRET, { expiresIn: "30m" });
+  const newToken = jwt.sign({ oldToken: Client }, process.env.CLIENT_SECRET, { expiresIn: "40m" });
 
   res.status(200).json({
     message: "This is tour new Token, enjoy!",
     token: newToken
-  })
+  });
 }
 
 export const refreshMechanicToken = async (req: Request, res: Response) => {
 
   const oldToken = jwt.decode(req.body.token);
-  const newToken = jwt.sign({ oldToken }, process.env.MECHANIC_SECRET, { expiresIn: "30m" });
+  const newToken = jwt.sign({ oldToken: Client }, process.env.MECHANIC_SECRET, { expiresIn: "40m" });
 
   res.status(200).json({
     message: "This is tour new Token, enjoy!",
     token: newToken
-  })
+  });
 }

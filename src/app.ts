@@ -1,8 +1,10 @@
 import 'reflect-metadata';
-const express = require("express");
+import express from "express";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocumentation from "./swagger.json";
 import { myDataSource } from "../app-data-source";
 import routes from "./routes"
-const dotenv = require('dotenv');
+import dotenv from "dotenv";
 
 dotenv.config({ path: './.env' });
 
@@ -16,6 +18,7 @@ myDataSource
   })
 
 const app = express();
+app.use("/api/v1/documentation", swaggerUi.serve, swaggerUi.setup(swaggerDocumentation));
 app.use(express.json());
 app.use(routes);
 

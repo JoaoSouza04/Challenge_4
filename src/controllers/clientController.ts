@@ -9,22 +9,30 @@ export const getAllClients = async (req: Request, res: Response) => {
     client.password = undefined;
   });
 
-  res.json(clients);
+  res.status(200).json(clients);
 }
 
 export const createClient = async (req: Request, res: Response) => {
   const client = await myDataSource.getRepository(Client).create(req.body);
   await myDataSource.getRepository(Client).save(client)
-  return res.json(client);
+  return res.status(201).json(client);
 }
 
 export const getOneClient = async (req: Request, res: Response) => {
-  const results = await myDataSource.getRepository(Client).findOneBy({
+  const client = await myDataSource.getRepository(Client).findOneBy({
     id: req.params.id,
   })
 
-  results.password = undefined;
-  return res.send(results);
+  if (!client) return res.status(404).json({
+    type: "UUID",
+    Error: {
+      resource: "URL ID",
+      description: "Can't find the client with the client id entered!"
+    }
+  });
+
+  client.password = undefined;
+  return res.status(200).send(client);
 }
 
 export const updateClient = async (req: Request, res: Response) => {
@@ -32,17 +40,17 @@ export const updateClient = async (req: Request, res: Response) => {
     id: req.params.id,
   });
 
-  if (!client) return res.status(400).json({
+  if (!client) return res.status(404).json({
     type: "UUID",
     Error: {
       resource: "URL ID",
-      description: "Can't find the user with the user entered!"
+      description: "Can't find the client with the client id entered!"
     }
-  })
+  });
   await myDataSource.getRepository(Client).merge(client, req.body)
   const results = await myDataSource.getRepository(Client).save(client);
 
   results.password = undefined;
 
-  return res.json(results);
+  return res.status(200).json(results);
 }

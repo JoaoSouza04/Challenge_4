@@ -8,7 +8,7 @@
     "dev": "ts-node-dev --transpile-only src/app.ts",
     "typeorm": "typeorm-ts-node-commonjs",
     "migrate:create": "typeorm migration:create  ./src/database/migrations/%NAME%",
-    "start": " src/server.ts"
+    "start": " src/app.ts"
   },
   "repository": {
     "type": "git",

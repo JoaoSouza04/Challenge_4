@@ -1102,6 +1102,268 @@
           }
         }
       }
+    },
+    "/api/v1/client/login": {
+      "post": {
+        "tags": ["Login"],
+        "summary": "Login the Client",
+        "description": "This route gives the token for one Client",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schema/Login"
+              },
+              "examples": {
+                "Client Login": {
+                  "value": {
+                    "email": "john.doe@provider5.com",
+                    "password": "password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Client not found!, please check the fields"
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Login"
+                },
+                "examples": {
+                  "Client Login": {
+                    "value": {
+                      "token": "token for the client"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "api/v1/client/updatePassword": {
+      "post": {
+        "tags": ["Login"],
+        "summary": "Update password for the client",
+        "description": "This route updates the password for one Client",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schema/Login"
+              },
+              "examples": {
+                "Client": {
+                  "value": {
+                    "email": "john.doe@provider5.com",
+                    "password": "your new password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Client not found!, please check the fields"
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Login"
+                },
+                "examples": {
+                  "Client Login": {
+                    "value": {
+                      "password": "your new password"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "api/v1/client/refreshToken": {
+      "post": {
+        "tags": ["Login"],
+        "summary": "refresh the Client Token",
+        "description": "This route returns a new token for one Client",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schema/RefreshToken"
+              },
+              "examples": {
+                "Client": {
+                  "value": {
+                    "token": "your token"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/RefreshToken"
+                },
+                "examples": {
+                  "Client": {
+                    "value": {
+                      "token": "your new token"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "api/v1/mechanic/login": {
+      "post": {
+        "tags": ["Login"],
+        "summary": "Login the Mechanic",
+        "description": "This route gives the token for one Mechanic",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schema/Login"
+              },
+              "examples": {
+                "Mechanic Login": {
+                  "value": {
+                    "email": "john.doe@provider5.com",
+                    "password": "password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Mechanic not found!, please check the fields"
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Login"
+                },
+                "examples": {
+                  "Mechanic Login": {
+                    "value": {
+                      "token": "token for the mechanic"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "api/v1/mechanic/updatePassword": {
+      "post": {
+        "tags": ["Login"],
+        "summary": "Update password for the mechanic",
+        "description": "This route updates the password for one Mechanic",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schema/Login"
+              },
+              "examples": {
+                "Mechanic": {
+                  "value": {
+                    "email": "john.doe@provider5.com",
+                    "password": "your new password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Mechanic not found!, please check the fields"
+          },
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/Login"
+                },
+                "examples": {
+                  "Mechanic Login": {
+                    "value": {
+                      "password": "your new password"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "api/v1/mechanic/refreshToken": {
+      "post": {
+        "tags": ["Login"],
+        "summary": "refresh the Mechanic Token",
+        "description": "This route returns a new token for one Mechanic",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schema/RefreshToken"
+              },
+              "examples": {
+                "Mechanic": {
+                  "value": {
+                    "token": "your token"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schema/RefreshToken"
+                },
+                "examples": {
+                  "Mechanic": {
+                    "value": {
+                      "token": "your new token"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
 
@@ -1315,6 +1577,25 @@
             "type": "Array<Part>"
           },
           "status": {
+            "type": "string"
+          }
+        }
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "RefreshToken": {
+        "type": "object",
+        "properties": {
+          "token": {
             "type": "string"
           }
         }

@@ -1,8 +1,9 @@
 # Challenge_4
 
-## Tecnologias utlizadas neste desafio:
+## technologies used in this challenge:
 
-Node js com o framework Express e TypeORM para conexão com o BD PostgreSQL, desafio desenvolvido 100% em TypeScript!
+Node js with the Express framework and TypeORM for the connection with PostgreSQL DB,
+challenge developed 100% in TypeScript!
 
 ### Steps to run this app in your environment!
 

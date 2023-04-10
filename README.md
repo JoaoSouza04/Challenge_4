@@ -6,11 +6,17 @@ Node js com o framework Express e TypeORM para conexão com o BD PostgreSQL, des
 
 ### Steps to run this app in your environment!
 
-### 1 - As a first step, you need to clone this repository into an empty folder, and for that, you must open the terminal and run this code: `git clone https://github.com/JoaoSouza04/Challenge_4.git`.
+### 1:
 
-### 2 - After the previously step, all you have to do is to go into the repository folder you just created, through the terminal. After that, you should run this `npm install`.
+As a first step, you need to clone this repository into an empty folder, and for that, you must open the terminal and run this code: `git clone https://github.com/JoaoSouza04/Challenge_4.git`.
 
-#### 3 - And welldone!, your setup is now ready for run this application! To start the app you can run `npm run start` that runs the app once, or `npm run dev` which runs every time that a save occurs.
+### 2:
+
+After the previously step, all you have to do is to go into the repository folder you just created, through the terminal. After that, you should run this `npm install`.
+
+#### 3:
+
+And welldone!, your setup is now ready for run this application! To start the app you can run `npm run start` that runs the app once, or `npm run dev` which runs every time that a save occurs.
 
 ## Routes
 
